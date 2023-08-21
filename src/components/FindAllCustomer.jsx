@@ -12,6 +12,7 @@ function FindAllCustomer() {
         // setCustomer(response.data.clientes)
         console.log(response.data)
         // customers.map(() => {
+          
         // })
       })
       .catch((error) => {

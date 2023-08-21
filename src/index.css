@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap');
 
-html, body {
+html {
   font-family: 'Merriweather Sans', sans-serif;
   height: 100%;
   width: 100%;
@@ -18,6 +18,28 @@ body {
   color: white;
 
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: start;
+}
+.fixed{
+  justify-content: end;
+  position: fixed;
+  width: 0%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
+  transition: width 0.3s ease-in-out;
+
+}
+div .fixed_disable {
+  display: none;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+
+}
+
+div .fixed_active {
+  display: flex;
+  width: 100%;
+  transition: width 0.3s ease-in-out;
+
 } 
