@@ -1,10 +1,9 @@
 import { useState } from "react";
 import style from "../module.css/Form.module.css";
 import Button from "@mui/material/Button";
-import { TextField, MenuItem } from '@mui/material';
+import { TextField, MenuItem } from "@mui/material";
 
 function Form() {
-
   const [nome, setNome] = useState();
   const [sobrenome, setSobrenome] = useState();
   const [cpf, setCpf] = useState();
@@ -18,204 +17,191 @@ function Form() {
   const [cidade, setCidade] = useState();
   const [uf, setUf] = useState();
 
-
   let cadastrarUsuario = async (e) => {
     e.preventDefault();
     try {
-        let res = await fetch("https://api-cadastro-clientes.onrender.com/clientes", {
-            method: "POST",
-            body: JSON.stringify({
-                nome: nome,
-                sobrenome: sobrenome,
-                cpf: cpf,
-                telefone: telefone,
-                email: email,
-                cep: cep,
-                logradouro: logradouro,
-                nr_residencial: nr_residencial,
-                complemento: complemento,
-                bairro: bairro,
-                cidade: cidade,
-                uf: uf
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (res.ok) {
-            let resJson = await res.json();
-            console.log("Resposta da API:", resJson);
-        } else {
-            console.log("Erro na requisição:", res.status, res.statusText);
-            console.log(uf);
+      let res = await fetch(
+        "https://api-cadastro-clientes.onrender.com/clientes",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            nome: nome,
+            sobrenome: sobrenome,
+            cpf: cpf,
+            telefone: telefone,
+            email: email,
+            cep: cep,
+            logradouro: logradouro,
+            nr_residencial: nr_residencial,
+            complemento: complemento,
+            bairro: bairro,
+            cidade: cidade,
+            uf: uf,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-    } catch (err) {
-        console.log("Erro na requisição:", err);
+      );
+
+      if (res.ok) {
+        let resJson = await res.json();
+        console.log("Resposta da API:", resJson);
+      } else {
+        console.log("Erro na requisição:", res.status, res.statusText);
         console.log(uf);
+      }
+    } catch (err) {
+      console.log("Erro na requisição:", err);
+      console.log(uf);
     }
   };
 
   const estados = [
-    'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 
-    'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+    "AC",
+    "AL",
+    "AP",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO",
   ];
 
-  const [ufMenu, setUfMenu] = useState('');
+  const [ufMenu, setUfMenu] = useState("");
 
   const handleUfChange = (event) => {
-  setUfMenu(event.target.value);
+    setUfMenu(event.target.value);
   };
 
   return (
-    <div className={style.container}>
-      <form onSubmit={cadastrarUsuario}>
-        <div className={style.form}>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="nome"
-              name="nome"
-              label="Digite o seu Nome:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setNome(e.target.value)}
-            />
+    <div className={style.box}>
+      <form>
+        <fieldset className={style.fieldset}>
+          <legend className={style.legend}>
+            <b>Fórmulário de Clientes</b>
+          </legend>
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="nome" id="nome" className={style.inputUser} onChange={(e) => setNome(e.target.value)} required />
+            <label for="nome" className={style.labelInput}> Nome:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="sobrenome"
-              name="sobrenome"
-              label="Digite o seu Sobrenome:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setSobrenome(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="sobrenome" id="sobrenome" className={style.inputUser}
+              onChange={(e) => setSobrenome(e.target.value)} required />
+            <label for="sobrenome" className={style.labelInput}>Sobrenome:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="cpf"
-              name="cpf"
-              label="Digite o seu CPF:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setCpf(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="cpf" id="cpf" className={style.inputUser}
+              onChange={(e) => setCpf(e.target.value)} required />
+            <label for="cpf" className={style.labelInput}>Cpf:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="number"
-              id="telefone"
-              name="telefone"
-              label="Digite o seu Telefone:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setTelefone(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="telefone" id="telefone" className={style.inputUser}
+              onChange={(e) => setTelefone(e.target.value)} required />
+            <label for="telefone" className={style.labelInput}>Telefone:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="email"
-              id="email"
-              name="email"
-              label="Digite o seu E-mail:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="email" id="email" className={style.inputUser}
+              onChange={(e) => setEmail(e.target.value)} required />
+            <label for="email" className={style.labelInput}>Email</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="cep"
-              name="cep"
-              label="Digite o seu CEP:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setCep(e.target.value)}
-            />
+          <br />
+          <br />
+        </fieldset>
+        <fieldset className={style.fieldset}>
+          <div className={style.inputBox}>
+            <input type="text" name="cep" id="cep" className={style.inputUser}
+              onChange={(e) => setCep(e.target.value)} required />
+            <label for="cep" className={style.labelInput}>Cep:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="logradouro"
-              name="logradouro"
-              label="Digite o seu Logradouro:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setLogradouro(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="logradouro" id="logradouro" className={style.inputUser}
+              onChange={(e) => setLogradouro(e.target.value)} required />
+            <label for="logradouro" className={style.labelInput}>Logradouro:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="number"
-              id="nr_residencial"
-              name="nr_residencial"
-              label="Digite o seu Número Residencial:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setNr(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="nr_residencial" id="nr_residencial" className={style.inputUser}
+              onChange={(e) => setNr(e.target.value)} required />
+            <label for="nr_residencial" className={style.labelInput}>Número Residencial:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="complemento"
-              name="complemento"
-              label="Digite o seu Complemento:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setComplemento(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="complemento" id="complemento" className={style.inputUser}
+              onChange={(e) => setComplemento(e.target.value)} required />
+            <label for="complemento" className={style.labelInput}>Complemento</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="bairro"
-              name="bairro"
-              label="Digite o seu Bairro:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setBairro(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="bairro" id="bairro" className={style.inputUser}
+              onChange={(e) => setBairro(e.target.value)} required />
+            <label for="bairro" className={style.labelInput}>Bairro:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-              type="text"
-              id="cidade"
-              name="cidade"
-              label="Digite o seu Cidade:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setCidade(e.target.value)}
-            />
+          <br />
+          <br />
+          <div className={style.inputBox}>
+            <input type="text" name="cidade" id="cidade" className={style.inputUser}
+              onChange={(e) => setCidade(e.target.value)} required />
+            <label for="cidade" className={style.labelInput}>Cidade:</label>
           </div>
-          <div className={style.div}>
-            <TextField
-            select
-            id="uf"
-            name="uf"
-            label="Escolha o UF:"
-            variant="filled"
-            className={style.background}
-            value={ufMenu}
-            onChange={(e) => {
-              handleUfChange(e);
-              setUf(e.target.value);
-            }}>
-            {estados.map((estado) => (
-              <MenuItem key={estado} value={estado}>
-                {estado}
-              </MenuItem>
-            ))}
-          </TextField>
+          <br />
+          <br />
+          <div className={style.inputBox}>
+          <select
+          id="uf"
+          name="uf"
+          label="Escolha o UF:"
+          className={style.inputUser}
+          value={ufMenu}
+          onChange={(e) => {
+            handleUfChange(e);
+            setUf(e.target.value);
+          }}>
+          {estados.map((estado) => (
+            <MenuItem key={estado} value={estado}>
+              {estado}
+            </MenuItem>
+          ))}
+        </select>
+        <label for="uf" className={style.labelInput}>UF:</label>
           </div>
-          </div>
-        <div className={style.divButton}>
-          <Button type="submit" variant="outlined" className={style.button}>Cadastrar Cliente</Button>
-        </div>
+          <br />
+          <br />
+          <input type="submit" name="submit" id="submit" className={style.submit}></input>
+        </fieldset>
       </form>
     </div>
   );
