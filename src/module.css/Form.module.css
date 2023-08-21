@@ -1,0 +1,44 @@
+/* Form.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border: 5px solid #1976d27a;
+  }
+  
+  .div {
+    margin-bottom: 15px;
+  }
+  
+  .background {
+    width: 100%;
+    background: white;
+  }
+  
+  .divButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+
+  .button {
+    background-color: #444; /* Botão escuro */
+    color: #fff;
+    border: 1px solid #fff;
+  }
+  
+  .button:hover {
+    background-color: #666; /* Efeito de hover um pouco mais claro */
+  }
+  
