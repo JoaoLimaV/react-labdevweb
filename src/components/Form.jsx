@@ -1,15 +1,11 @@
 import { useState } from "react";
 import style from "../module.css/Form.module.css";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import { TextField, MenuItem } from '@mui/material';
 
 function Form() {
-  function cadastrarUsuario(e) {
-    e.preventDefault();
-    console.log(`Usuario ${name} foi cadastrado`);
-  }
 
-  const [name, setName] = useState();
+  const [nome, setNome] = useState();
   const [sobrenome, setSobrenome] = useState();
   const [cpf, setCpf] = useState();
   const [telefone, setTelefone] = useState();
@@ -22,6 +18,55 @@ function Form() {
   const [cidade, setCidade] = useState();
   const [uf, setUf] = useState();
 
+
+  let cadastrarUsuario = async (e) => {
+    e.preventDefault();
+    try {
+        let res = await fetch("https://api-cadastro-clientes.onrender.com/clientes", {
+            method: "POST",
+            body: JSON.stringify({
+                nome: nome,
+                sobrenome: sobrenome,
+                cpf: cpf,
+                telefone: telefone,
+                email: email,
+                cep: cep,
+                logradouro: logradouro,
+                nr_residencial: nr_residencial,
+                complemento: complemento,
+                bairro: bairro,
+                cidade: cidade,
+                uf: uf
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (res.ok) {
+            let resJson = await res.json();
+            console.log("Resposta da API:", resJson);
+        } else {
+            console.log("Erro na requisição:", res.status, res.statusText);
+            console.log(uf);
+        }
+    } catch (err) {
+        console.log("Erro na requisição:", err);
+        console.log(uf);
+    }
+  };
+
+  const estados = [
+    'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 
+    'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
+  ];
+
+  const [ufMenu, setUfMenu] = useState('');
+
+  const handleUfChange = (event) => {
+  setUfMenu(event.target.value);
+  };
+
   return (
     <div className={style.container}>
       <form onSubmit={cadastrarUsuario}>
@@ -29,12 +74,12 @@ function Form() {
           <div className={style.div}>
             <TextField
               type="text"
-              id="name"
-              name="name"
+              id="nome"
+              name="nome"
               label="Digite o seu Nome:"
               variant="filled"
               className={style.background}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setNome(e.target.value)}
             />
           </div>
           <div className={style.div}>
@@ -149,14 +194,23 @@ function Form() {
           </div>
           <div className={style.div}>
             <TextField
-              type="text"
-              id="uf"
-              name="uf"
-              label="Digite o seu UF:"
-              variant="filled"
-              className={style.background}
-              onChange={(e) => setUf(e.target.value)}
-            />
+            select
+            id="uf"
+            name="uf"
+            label="Escolha o UF:"
+            variant="filled"
+            className={style.background}
+            value={ufMenu}
+            onChange={(e) => {
+              handleUfChange(e);
+              setUf(e.target.value);
+            }}>
+            {estados.map((estado) => (
+              <MenuItem key={estado} value={estado}>
+                {estado}
+              </MenuItem>
+            ))}
+          </TextField>
           </div>
           </div>
         <div className={style.divButton}>
