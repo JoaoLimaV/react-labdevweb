@@ -45,12 +45,20 @@
   display: block;
 }
 
-.side_menu li {
+.side_menu a {
+  display: block;
   list-style: none;
   text-decoration: none;
   color: white;
   padding: 30px;
   text-align: end;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.side_menu a:hover {
+  background-color: rgba(128, 128, 128, 0.5);
+  color: rgb(231, 142, 7);
 }
 
 .close_side_menu {
@@ -63,18 +71,12 @@
   cursor: pointer;
 } 
 
-li a {
+a {
   color: white;
   text-decoration: none;
 }
 
-/* Define a cor dos links quando o mouse passa por cima */
-li a:hover {
-  color: #ff9900;
-  /* Substitua pelo código de cor desejado */
-}
 
-/* CSS media query dentro de um stylesheet */
 @media (max-width: 1000px) {
   .side_menu {
     width: 60%;
