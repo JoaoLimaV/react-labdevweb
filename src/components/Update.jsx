@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { green, red, yellow } from '@mui/material/colors';
+import { red, yellow } from '@mui/material/colors';
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,7 +8,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { AiOutlineUserAdd } from 'react-icons/ai';
 
 const estados = [
     "AC",
@@ -34,13 +33,13 @@ const estados = [
     "RS",
     "RO",
     "RR",
-    "SC", 
+    "SC",
     "SP",
     "SE",
     "TO",
   ];
   
-function Cadastro( { actualizeTable }) {
+function Cadastro( { id_usuario }) {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
       nome: '',
@@ -77,17 +76,14 @@ function Cadastro( { actualizeTable }) {
       e.preventDefault();
       try {
         const res = await axios.post(
-          'https://api-cadastro-clientes.onrender.com/clientes',
+         `https://api-cadastro-clientes.onrender.com/update/${id_usuario}`,
           formData
         );
   
         if (res.status === 200 || res.status === 201) {
           console.log('Resposta da API:', res.data);
-          actualizeTable()
-           handleClose(); 
-
         } else {
-          console.error('Erro na requisição:', res.status, res.data);
+          console.error('Erro na requisição:', res.status, res.statusText);
         }
       } catch (err) {
         console.error('Erro na requisição:', err);
@@ -95,13 +91,12 @@ function Cadastro( { actualizeTable }) {
     };
 
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'end'}}>
-      <Button onClick={handleClickOpen} variant="contained" style={{ backgroundColor: green[500], color: 'white', fontSize:'24px'}}>
-        <AiOutlineUserAdd />
+    <div>
+      <Button onClick={handleClickOpen} variant="contained" style={{ backgroundColor: 'gray', color: 'white' }}>
+        Cadastrar
       </Button>
-
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle> Formulário de Clientes </DialogTitle>
+        <DialogTitle> Formulário de Update </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -110,8 +105,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.nome}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Sobrenome"
@@ -119,8 +112,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.sobrenome}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="CPF"
@@ -128,8 +119,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.cpf}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Telefone"
@@ -137,8 +126,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.telefone}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Email"
@@ -146,8 +133,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.email}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="CEP"
@@ -155,8 +140,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.cep}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Logradouro"
@@ -164,8 +147,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.logradouro}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Número Residencial"
@@ -173,8 +154,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.nr_residencial}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Complemento"
@@ -182,8 +161,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.complemento}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Bairro"
@@ -191,8 +168,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.bairro}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Cidade"
@@ -200,8 +175,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.cidade}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               select
@@ -210,8 +183,6 @@ function Cadastro( { actualizeTable }) {
               value={formData.uf}
               onChange={handleInputChange}
               fullWidth
-              required
-              style={{margin:'5px 0px 5px 0px'}}
             >
               {estados.map((estado) => (
                 <MenuItem key={estado} value={estado}>
@@ -221,13 +192,13 @@ function Cadastro( { actualizeTable }) {
             </TextField>
             <br />
             <br />
-            <Button type="submit" style={{ background: 'rgb(28, 31, 37)', width:'100%', color:'white' }}>
+            <Button type="submit" color="primary">
               Enviar
             </Button>
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={ () => { handleClose() }}  style={{ background: 'red', color:"white"}}>
+          <Button onClick={handleClose} color="primary">
             Fechar
           </Button>
         </DialogActions>

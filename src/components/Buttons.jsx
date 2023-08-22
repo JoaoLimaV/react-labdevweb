@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { red, yellow } from '@mui/material/colors';
+import { green, red, yellow } from '@mui/material/colors';
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
+import { BsFillTrashFill } from 'react-icons/bs';
+import { AiFillEdit } from 'react-icons/ai';
 
 const estados = [
     "AC",
@@ -41,7 +42,7 @@ const estados = [
     "TO",
   ];
   
-function Buttons({ id }) {
+function Buttons({ id, actualizeTable }) {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -79,14 +80,23 @@ function Buttons({ id }) {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+
+      const dataToSend = {};
+      for (const key in formData) {
+        if (formData[key]) {
+          dataToSend[key] = formData[key];
+        }
+      }
+      
       try {
-        const res = await axios.post(
-          'https://api-cadastro-clientes.onrender.com/clientes',
-          formData
+        const res = await axios.patch(
+          `https://api-cadastro-clientes.onrender.com/clientes/${id}`,
+          dataToSend
         );
-  
         if (res.status === 200) {
           console.log('Resposta da API:', res.data);
+          actualizeTable();
+          handleClose()
         } else {
           console.error('Erro na requisição:', res.status, res.statusText);
         }
@@ -96,11 +106,11 @@ function Buttons({ id }) {
     };
 
   const handleDelete = () => {
-    // Use o Axios para enviar uma solicitação de exclusão com o ID
     axios.delete(`https://api-cadastro-clientes.onrender.com/clientes/${id}`)
       .then(response => {
         setForceUpdate(!forceUpdate);
-    })
+        actualizeTable();
+      })
       .catch(error => {
         console.error('Erro ao deletar o item:', error);
       });
@@ -110,16 +120,18 @@ function Buttons({ id }) {
     <div>
       <Button
         variant="contained"
-        style={{ backgroundColor: red[500], color: 'white' }}
+        style={{ backgroundColor: red[500], color: 'white',margin:'5px' }}
         onClick={handleDelete}
       >
-        Delete
+        <BsFillTrashFill />
       </Button>
-      <Button onClick={handleClickOpen} variant="contained" style={{ backgroundColor: yellow[500], color: 'white' }}>
-        Edit
+      
+      <Button onClick={handleClickOpen} variant="contained" style={{ backgroundColor: 'gray', color: 'white',margin:'5px' }}>
+        <AiFillEdit />
       </Button>
+
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Formulário de Clientes</DialogTitle>
+        <DialogTitle> Formulário de Update </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <TextField
@@ -128,7 +140,7 @@ function Buttons({ id }) {
               value={formData.nome}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Sobrenome"
@@ -136,7 +148,7 @@ function Buttons({ id }) {
               value={formData.sobrenome}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="CPF"
@@ -144,7 +156,7 @@ function Buttons({ id }) {
               value={formData.cpf}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Telefone"
@@ -152,7 +164,7 @@ function Buttons({ id }) {
               value={formData.telefone}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Email"
@@ -160,7 +172,7 @@ function Buttons({ id }) {
               value={formData.email}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="CEP"
@@ -168,7 +180,7 @@ function Buttons({ id }) {
               value={formData.cep}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Logradouro"
@@ -176,7 +188,7 @@ function Buttons({ id }) {
               value={formData.logradouro}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Número Residencial"
@@ -184,7 +196,7 @@ function Buttons({ id }) {
               value={formData.nr_residencial}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Complemento"
@@ -192,7 +204,7 @@ function Buttons({ id }) {
               value={formData.complemento}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Bairro"
@@ -200,7 +212,7 @@ function Buttons({ id }) {
               value={formData.bairro}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               label="Cidade"
@@ -208,7 +220,7 @@ function Buttons({ id }) {
               value={formData.cidade}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             />
             <TextField
               select
@@ -217,7 +229,7 @@ function Buttons({ id }) {
               value={formData.uf}
               onChange={handleInputChange}
               fullWidth
-              required
+              style={{margin:'5px 0px 5px 0px'}}
             >
               {estados.map((estado) => (
                 <MenuItem key={estado} value={estado}>
@@ -227,15 +239,15 @@ function Buttons({ id }) {
             </TextField>
             <br />
             <br />
-            <Button type="submit" color="primary">
+            <Button type="submit" style={{ background: 'rgb(28, 31, 37)', width:'100%', color:'white' }}>
               Enviar
             </Button>
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Fechar
-          </Button>
+            <Button onClick={handleClose}  style={{ background: 'red', color:"white"}}>
+              Fechar
+            </Button>
         </DialogActions>
       </Dialog>
     </div>

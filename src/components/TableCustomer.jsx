@@ -32,12 +32,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-
-export default function TableCustomer ({props}) {
+export default function TableCustomer ( {props, actualizeTable} ) {
 
   return (
     <>
-        <Cadastro></Cadastro>
+        <Cadastro actualizeTable={actualizeTable}/>
+        <br/>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
@@ -60,7 +60,7 @@ export default function TableCustomer ({props}) {
                 <StyledTableCell align="center">{row.email}</StyledTableCell>
                 <StyledTableCell align="center">{row.logradouro}</StyledTableCell>
                 <StyledTableCell align="center">{row.cep}</StyledTableCell>
-                <StyledTableCell align="center"><Buttons id={row.id}></Buttons></StyledTableCell>
+                <StyledTableCell align="center"><Buttons id={row.id} actualizeTable={actualizeTable}></Buttons></StyledTableCell>
                 </StyledTableRow>
             ))}
             </TableBody>

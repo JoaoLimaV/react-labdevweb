@@ -20,10 +20,10 @@ function NavBar() {
                 <div className={styles.side_menu}>
                     <span className={styles.close_side_menu} onClick={() => toogleSideBar("fixed_disable")}> <AiOutlineClose /> </span>
                     <Link to="/cliente">  Todos os Clientes </Link>
-                    <Link to="/cliente/find"> Procurar Cliente  </Link>
+                    {/* <Link to="/cliente/find"> Procurar Cliente  </Link>
                     <Link to="/cliente/save"> Cadastrar Cliente </Link>
                     <Link to="/cliente/update"> Alterar Cliente </Link>
-                    <Link to="/cliente/delete"> Deletar Cliente </Link>
+                    <Link to="/cliente/delete"> Deletar Cliente </Link> */}
                 </div>
             </div>
 

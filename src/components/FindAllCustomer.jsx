@@ -6,20 +6,25 @@ import TableCustomer from './TableCustomer';
 
 function FindAllCustomer() {
 
-  const [customers, setCustomer] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    dataTable();
+  }, []);
+
+  const dataTable = () => {
     const apiUrl = 'https://api-cadastro-clientes.onrender.com/clientes';
     axios(apiUrl)
       .then((response) => {
-        setCustomer(response.data.data.clientes)
+        setCustomers(response.data.data.clientes);
         setIsLoading(false);
       })
       .catch((error) => {
         console.error('Erro ao consumir a API:', error);
       });
-  }, []);
+  };
+
 
   if (isLoading) {
     return <p> Carregando...</p>;
@@ -30,7 +35,7 @@ function FindAllCustomer() {
 
       <h2> Todos os Clientes </h2>
       <div className={styles.customers}>
-        <TableCustomer props={customers}/>
+        <TableCustomer props={customers} actualizeTable={dataTable}/>
       </div>
     </div>
   );

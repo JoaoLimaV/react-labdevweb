@@ -70,3 +70,7 @@ li {
   justify-content: center;
   align-items: center;
 }
+
+.input-margin {
+  margin: 5px;
+} 
