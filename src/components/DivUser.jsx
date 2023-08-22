@@ -1,8 +1,22 @@
+import React from 'react';
 import styles from '../module.css/FindAllCustomer.module.css'
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function DivUser( props ) {
+  const navigate = useNavigate();
+
+  const handleDelete = () => {
+    axios.delete(`https://api-cadastro-clientes.onrender.com/delete/${props.id}`)
+      .then(response => {
+        console.log('Usuário excluído com sucesso:', response.data);
+        navigate('/cliente');
+      })
+      .catch(error => {
+        console.error('Erro ao excluir usuário:', error);
+      });
+  };
+
   return (
     <div className={styles.div_user}>
 
@@ -21,6 +35,7 @@ export default function DivUser( props ) {
         </div>
 
         <Link to={`/cliente/find/${props.id}`} className={styles.a}>  Ver mais </Link>
+        <button className={styles.deleteButton} onClick={handleDelete}>Excluir</button>
     </div>
   );
 }

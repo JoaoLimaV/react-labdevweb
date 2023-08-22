@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DivUser from './DivUser';
 import styles from '../module.css/FindAllCustomer.module.css'
+import TableCustomer from './TableCustomer';
 
 function FindAllCustomer() {
 
@@ -29,13 +30,7 @@ function FindAllCustomer() {
 
       <h2> Todos os Clientes </h2>
       <div className={styles.customers}>
-        { 
-          customers.map((customer, index) => {
-            return (
-              <DivUser key={index} id={customer.id} nome={customer.nome} telefone={customer.telefone} email={customer.email}/>
-            );
-          })
-        }
+        <TableCustomer props={customers}/>
       </div>
     </div>
   );
