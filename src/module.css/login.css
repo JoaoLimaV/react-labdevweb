@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.main{
+    background-color: rgba(164, 197, 197, 0.575);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.centralizar{
+    width: 50%;
+}
+
+.logo{
+    background: white;
+    padding: 30px 50px;
+    text-align: center;
+}
+
+.p{
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.input{
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid black;
+}
+
+.btn{
+    margin: 5px;
+    padding: 7px;
+    border-radius: 3px;
+}

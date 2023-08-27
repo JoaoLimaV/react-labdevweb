@@ -1,10 +1,11 @@
-import IndexRoutes from './routes/IndexRoutes';
+import './App.css';
+import Login from './componentes/Login.jsx'
 
 function App() {
   return (
-    <>
-      <IndexRoutes/>
-    </>
+   <div>
+    <Login/>
+  </div>
   );
 }
 
