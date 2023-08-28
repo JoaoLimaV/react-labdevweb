@@ -1,10 +1,10 @@
 import './App.css';
-import Login from './componentes/Login.jsx'
+import IndexRoutes from './routes/IndexRoutes';
 
 function App() {
   return (
    <div>
-    <Login/>
+    <IndexRoutes/>
   </div>
   );
 }

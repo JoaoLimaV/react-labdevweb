@@ -1,90 +1,99 @@
-.nav {
-  width: auto;
-  height: 50px;
-
+.sidebar {
+    
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  border: 2px solid #788896;
+
+  width: 250px;
+  height: 100vh;
+  background-color: #E3E8ED;
+  color: #fff;
+  padding: 20px;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
 .logo {
-  font-size: 24px;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
 }
 
-.logo a{
-  display: flex;
-  align-items: center;
-  color: white;
-  text-decoration: none;
-}
-
-.logo span.text {
-  font-size: 16px;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
+.profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .menu {
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.side_menu  {
-  height: 100%;
-  width: 30%;
-  background-color: rgb(28, 31, 37);
-  display: block;
-}
-
-.side_menu a {
-  display: block;
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  margin-bottom: 10px;
+}
+
+.menu a {
   text-decoration: none;
-  color: white;
-  padding: 30px;
-  text-align: end;
-  text-align: center;
-  margin-top: 50px;
-}
-
-.side_menu a:hover {
-  background-color: rgba(128, 128, 128, 0.5);
-  color: rgb(231, 142, 7);
-}
-
-.close_side_menu {
-  margin-top: 20px;
-  margin-right: 30px;
-  font-size: 32px;
+  color: #fff;
+  font-size: 18px;
   display: flex;
-  justify-content: end;
+  align-items: center;
+}
 
-  cursor: pointer;
-} 
+.menu a svg {
+  margin-right: 10px;
+}
 
-a {
-  color: white;
+.listItems {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #293845;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.items p {
+  display: inline;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: #293845;
   text-decoration: none;
 }
 
-
-@media (max-width: 1000px) {
-  .side_menu {
-    width: 60%;
-  }
+.footerItens {
+  color: #293845;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: left;
 }
 
-@media (max-width: 600px) {
-  .side_menu {
-    width: 80%;
-  }
+.footerIcons {
+  color: #293845;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: left;
 }
